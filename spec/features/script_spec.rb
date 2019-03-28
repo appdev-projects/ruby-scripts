@@ -248,27 +248,22 @@ describe "loan_payment.rake" do
   end
 end
 
-# describe "count_and_sort.rake" do
-#   it "outputs list of sorted numbers with a count", points: 1 do
-#     path_to_file = Rails.root + "lib/input_files/descriptive_statistics_numbers.txt"
-#     string_input = open(path_to_file).read.chomp
-#     numbers = string_input.gsub(",", "").split.map(&:to_f)
-#
-#     sorted_numbers = numbers.sort
-#     count = numbers.count
-#
-#     regex_string = sorted_numbers.inject("") {|num, str| "#{Regexp.escape(num)}.*#{str}" }
-#     sorted_numbers_regex = Regexp.new(regex_string)
-#     ap(sorted_numbers_regex)
-#
-#     rake_task_output = capture_rake_task_output(task_name: 'count_and_sort')
-#
-#     ap(rake_task_output)
-#
-#     expect(rake_task_output.index(sorted_numbers_regex)).to be_truthy
-#
-#   end
-# end
+describe "count_and_sort.rake" do
+  it "outputs list of sorted numbers with a count", points: 1 do
+    path_to_file = Rails.root + "lib/input_files/descriptive_statistics_numbers.txt"
+    string_input = open(path_to_file).read.chomp
+    numbers = string_input.gsub(",", "").split.map(&:to_f)
+
+    sorted_numbers = numbers.sort
+    count = numbers.count
+
+    rake_task_output = capture_rake_task_output(task_name: 'count_and_sort')
+    expect(rake_task_output).to include(numbers.awesome_inspect)
+    expect(rake_task_output).to include("Count: #{count}")
+    expect(rake_task_output).to include(sorted_numbers.awesome_inspect)
+
+  end
+end
 
 describe "minimum.rake" do
   it "calculates the minimum from a list of numbers", points: 1 do
