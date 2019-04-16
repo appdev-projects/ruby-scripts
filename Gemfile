@@ -79,7 +79,7 @@ group :production do
   gem "rails_12factor"
 end
 
-gem 'activeadmin', github: 'activeadmin/activeadmin'
-gem 'devise', github: 'plataformatec/devise'
+gem 'activeadmin'
+gem 'devise'
 gem "array_to_csv", :require => "array_to_csv/core_ext"
 gem "httparty"
